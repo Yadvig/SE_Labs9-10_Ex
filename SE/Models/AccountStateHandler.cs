@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SE.Models
+﻿namespace SE.Models
 {
     public delegate void AccountStateHandler(object sender, AccountEventArgs e);
     public class AccountEventArgs
