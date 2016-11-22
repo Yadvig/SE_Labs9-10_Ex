@@ -13,9 +13,11 @@ namespace SE
     {
         static void Main(string[] args)
         {
-
+            //Создание контроллера и инициализация его моделью
             BankManager manager = new BankManager(new Bank<Account>("SomeBank"));
+            //Создание представление и инициализация его контроллером
             ConsoleView view = new ConsoleView(manager);
+            //Запуск представления
             view.ViewEngine();
            
         }
