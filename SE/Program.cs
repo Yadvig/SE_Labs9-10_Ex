@@ -14,7 +14,7 @@ namespace SE
         static void Main(string[] args)
         {
 
-            BankManager manager = new BankManager(new Bank<Account>("ЮнитБанк"));
+            BankManager manager = new BankManager(new Bank<Account>("SomeBank"));
             ConsoleView view = new ConsoleView(manager);
             view.ViewEngine();
            

@@ -20,7 +20,7 @@ namespace SE.Views
             while (alive)
             {
                 ConsoleColor color = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkBlue; // выводим список команд зеленым цветом
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("1. Открыть счет \t 2. Вывести средства  \t 3. Добавить на счет");
                 Console.WriteLine("4. Закрыть счет \t 5. Пропустить день \t 6. Выйти из программы");
                 Console.WriteLine("Введите номер пункта:");
