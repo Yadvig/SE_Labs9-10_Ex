@@ -9,8 +9,8 @@ namespace SE.Controllers
 {
     public class BankManager
     {
-        private Bank<Account> bank;
-        public BankManager(Bank<Account> Bank)
+        private Bank bank;
+        public BankManager(Bank Bank)
         {
             bank = Bank;
         }
@@ -33,7 +33,7 @@ namespace SE.Controllers
                 sum,
                 AddSumHandler,  // обработчик добавления средств на счет
                 WithdrawSumHandler, // обработчик вывода средств
-                (o, e) => Console.WriteLine(e.Message), // обработчик начислений процентов в виде лямбда-выражения
+                (o, e) => Console.WriteLine(e.Message),  // обработчик начислений процентов в виде лямбда-выражения
                 CloseAccountHandler, // обработчик закрытия счета
                 OpenAccountHandler); // обработчик открытия счета
         }

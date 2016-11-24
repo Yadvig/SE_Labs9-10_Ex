@@ -11,9 +11,10 @@ namespace SE.Models
         public DepositAccount(decimal sum, int percentage) : base(sum, percentage)
         {
         }
+        public DepositAccount(): base() { }
         protected internal override void Open()
         {
-            base.OnOpened(new AccountEventArgs("Открыт новый депозитный счет!Id счета: " + this.Id, this._sum));
+            base.OnOpened(new AccountEventArgs("Открыт новый депозитный счет!Id счета: " + this.Id, this.Sum));
         }
 
         public override void Put(decimal sum)

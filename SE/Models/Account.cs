@@ -20,30 +20,20 @@ namespace SE.Models
         protected internal event AccountStateHandler Calculated;
 
         public int Id { get; set; }
-        static int counter = 0;
+       
+        public decimal Sum { get; set; } // Переменная для хранения суммы
 
-        protected decimal _sum; // Переменная для хранения суммы
-        protected int _percentage; // Переменная для хранения процента
+        public int Percentage { get; set; } // Переменная для хранения процента
 
         protected int _days = 0; // время с момента открытия счета
 
         public Account(decimal sum, int percentage)
         {
-            _sum = sum;
-            _percentage = percentage;
-            Id = ++counter;
+            Sum = sum;
+            Percentage = percentage;           
         }
 
-        // Текущая сумма на счету
-        public decimal CurrentSum
-        {
-            get { return _sum; }
-        }
-
-        public int Percentage
-        {
-            get { return _percentage; }
-        }
+        public Account() { }
 
         // вызов событий
         private void CallEvent(AccountEventArgs e, AccountStateHandler handler)
@@ -72,18 +62,18 @@ namespace SE.Models
         {
             CallEvent(e, Calculated);
         }
-
+        //Операции со счетом
         public virtual void Put(decimal sum)
         {
-            _sum += sum;
+            Sum += sum;
             OnAdded(new AccountEventArgs("На счет поступило " + sum, sum));
         }
         public virtual decimal Withdraw(decimal sum)
         {
             decimal result = 0;
-            if (sum <= _sum)
+            if (sum <= Sum)
             {
-                _sum -= sum;
+                Sum -= sum;
                 result = sum;
                 OnWithdrawed(new AccountEventArgs("Сумма " + sum + " снята со счета " + Id, sum));
             }
@@ -96,12 +86,12 @@ namespace SE.Models
         // открытие счета
         protected internal virtual void Open()
         {
-            OnOpened(new AccountEventArgs("Открыт новый депозитный счет!Id счета: " + this.Id, this._sum));
+            OnOpened(new AccountEventArgs("Открыт новый депозитный счет!Id счета: " + this.Id, this.Sum));
         }
         // закрытие счета
         protected internal virtual void Close()
         {
-            OnClosed(new AccountEventArgs("Счет " + Id + " закрыт.  Итоговая сумма: " + CurrentSum, CurrentSum));
+            OnClosed(new AccountEventArgs("Счет " + Id + " закрыт.  Итоговая сумма: " + Sum, Sum));
         }
 
         protected internal void IncrementDays()
@@ -111,8 +101,8 @@ namespace SE.Models
         // начисление процентов
         protected internal virtual void Calculate()
         {
-            decimal increment = _sum * _percentage / 100;
-            _sum = _sum + increment;
+            decimal increment = Sum * Percentage / 100;
+            Sum = Sum + increment;
             OnCalculated(new AccountEventArgs("Начислены проценты в размере: " + increment, increment));
         }
     }

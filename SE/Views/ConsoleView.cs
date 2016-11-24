@@ -20,7 +20,7 @@ namespace SE.Views
             while (alive)
             {
                 ConsoleColor color = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("1. Открыть счет \t 2. Вывести средства  \t 3. Добавить на счет");
                 Console.WriteLine("4. Закрыть счет \t 5. Пропустить день \t 6. Выйти из программы");
                 Console.WriteLine("Введите номер пункта:");
@@ -51,7 +51,7 @@ namespace SE.Views
                     }
                     manager.CalculatePercentage();
                 }
-                catch (Exception ex)
+               catch (Exception ex)
                 {
                     // выводим сообщение об ошибке красным цветом
                     color = Console.ForegroundColor;
