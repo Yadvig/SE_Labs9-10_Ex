@@ -19,7 +19,7 @@ namespace SE.Models
         // Событие возникающее при начислении процентов
         protected internal event AccountStateHandler Calculated;
 
-        protected int _id;
+        public int Id { get; set; }
         static int counter = 0;
 
         protected decimal _sum; // Переменная для хранения суммы
@@ -31,7 +31,7 @@ namespace SE.Models
         {
             _sum = sum;
             _percentage = percentage;
-            _id = ++counter;
+            Id = ++counter;
         }
 
         // Текущая сумма на счету
@@ -45,10 +45,6 @@ namespace SE.Models
             get { return _percentage; }
         }
 
-        public int Id
-        {
-            get { return _id; }
-        }
         // вызов событий
         private void CallEvent(AccountEventArgs e, AccountStateHandler handler)
         {
@@ -89,23 +85,23 @@ namespace SE.Models
             {
                 _sum -= sum;
                 result = sum;
-                OnWithdrawed(new AccountEventArgs("Сумма " + sum + " снята со счета " + _id, sum));
+                OnWithdrawed(new AccountEventArgs("Сумма " + sum + " снята со счета " + Id, sum));
             }
             else
             {
-                OnWithdrawed(new AccountEventArgs("Недостаточно денег на счете " + _id, sum));
+                OnWithdrawed(new AccountEventArgs("Недостаточно денег на счете " + Id, sum));
             }
             return result;
         }
         // открытие счета
         protected internal virtual void Open()
         {
-            OnOpened(new AccountEventArgs("Открыт новый депозитный счет!Id счета: " + this._id, this._sum));
+            OnOpened(new AccountEventArgs("Открыт новый депозитный счет!Id счета: " + this.Id, this._sum));
         }
         // закрытие счета
         protected internal virtual void Close()
         {
-            OnClosed(new AccountEventArgs("Счет " + _id + " закрыт.  Итоговая сумма: " + CurrentSum, CurrentSum));
+            OnClosed(new AccountEventArgs("Счет " + Id + " закрыт.  Итоговая сумма: " + CurrentSum, CurrentSum));
         }
 
         protected internal void IncrementDays()

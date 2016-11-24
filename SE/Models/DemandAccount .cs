@@ -14,7 +14,7 @@ namespace SE.Models
 
         protected internal override void Open()
         {
-            base.OnOpened(new AccountEventArgs("Открыт новый счет до востребования! Id счета: " + this._id, this._sum));
+            base.OnOpened(new AccountEventArgs("Открыт новый счет до востребования! Id счета: " + this.Id, this._sum));
         }
     }
 }
