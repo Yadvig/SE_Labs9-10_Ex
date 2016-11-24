@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BankManager.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountContext.cs" />
     <Compile Include="Models\AccountStateHandler.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\DemandAccount .cs" />
