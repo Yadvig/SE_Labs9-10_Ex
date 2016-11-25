@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SE.Models;
 
 namespace SE.Controllers
@@ -13,6 +9,15 @@ namespace SE.Controllers
         public BankManager(Bank Bank)
         {
             bank = Bank;
+        }
+        public void AttachEvents()
+        {
+            bank.Attach(
+               AddSumHandler,  // обработчик добавления средств на счет
+               WithdrawSumHandler, // обработчик вывода средств
+               (o, e) => Console.WriteLine(e.Message),  // обработчик начислений процентов в виде лямбда-выражения
+               CloseAccountHandler, // обработчик закрытия счета
+               OpenAccountHandler); // обработчик открытия счета
         }
         public void OpenAccount()
         {

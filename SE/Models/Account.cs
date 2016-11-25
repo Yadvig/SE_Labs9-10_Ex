@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SE.Models
+﻿namespace SE.Models
 {
     public abstract class Account: IAccount
     {
         //Событие, возникающее при выводе денег
-        protected internal event AccountStateHandler Withdrawed;
+        protected internal static event AccountStateHandler Withdrawed;
         // Событие возникающее при добавление на счет
-        protected internal event AccountStateHandler Added;
+        protected internal static event AccountStateHandler Added;
         // Событие возникающее при открытии счета
-        protected internal event AccountStateHandler Opened;
+        protected internal static event AccountStateHandler Opened;
         // Событие возникающее при закрытии счета
-        protected internal event AccountStateHandler Closed;
+        protected internal static event AccountStateHandler Closed;
         // Событие возникающее при начислении процентов
-        protected internal event AccountStateHandler Calculated;
+        protected internal static event AccountStateHandler Calculated;
 
         public int Id { get; set; }
        

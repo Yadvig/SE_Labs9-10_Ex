@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SE.Controllers;
 
 namespace SE.Views
@@ -44,12 +40,12 @@ namespace SE.Views
                             manager.CloseAccount();
                             break;
                         case 5:
+                            manager.CalculatePercentage();
                             break;
                         case 6:
                             alive = false;
                             continue;
                     }
-                    manager.CalculatePercentage();
                 }
                catch (Exception ex)
                 {
