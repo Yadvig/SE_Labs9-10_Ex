@@ -1,4 +1,7 @@
-﻿namespace SE.Models
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace SE.Models
 {
     public enum AccountType
     {
@@ -7,7 +10,7 @@
     }
     public class Bank
     {
-       AccountContext db;
+        AccountContext db;
         private Account account = null;
 
         public string Name { get; private set; }
@@ -18,6 +21,7 @@
             db = new AccountContext();
            
         }
+        //подключение обработчиков из контроллера к событиям модели
         public void Attach(AccountStateHandler addSumHandler, AccountStateHandler withdrawSumHandler,
             AccountStateHandler calculationHandler, AccountStateHandler closeAccountHandler,
             AccountStateHandler openAccountHandler)
@@ -29,10 +33,7 @@
             Account.Calculated += calculationHandler;
         }
         // метод создания счета
-        public void Open(AccountType accountType, decimal sum,
-            AccountStateHandler addSumHandler, AccountStateHandler withdrawSumHandler,
-            AccountStateHandler calculationHandler, AccountStateHandler closeAccountHandler,
-            AccountStateHandler openAccountHandler)
+        public void Open(AccountType accountType, decimal sum)
         {
                 //выбор типа счета и создание объекта конкретного счета
                 switch (accountType)
@@ -82,6 +83,11 @@
                     account.Calculate();
                 }
                 db.SaveChanges();
+        }
+        public List<Account> ViewAccounts()
+        {
+            List<Account> accounts = db.Accounts.ToList();
+            return accounts;
         }
     }
 }

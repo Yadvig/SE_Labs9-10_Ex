@@ -19,7 +19,7 @@
 
         public int Percentage { get; set; } // Переменная для хранения процента
 
-        protected int _days = 0; // время с момента открытия счета
+        public int Days { get; set; } = 0;// время с момента открытия счета
 
         public Account(decimal sum, int percentage)
         {
@@ -90,7 +90,7 @@
 
         protected internal void IncrementDays()
         {
-            _days++;
+            Days++;
         }
         // начисление процентов
         protected internal virtual void Calculate()

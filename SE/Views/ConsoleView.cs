@@ -18,7 +18,8 @@ namespace SE.Views
                 ConsoleColor color = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("1. Открыть счет \t 2. Вывести средства  \t 3. Добавить на счет");
-                Console.WriteLine("4. Закрыть счет \t 5. Пропустить день \t 6. Выйти из программы");
+                Console.WriteLine("4. Закрыть счет \t 5. Пропустить день \t 6. Список счетов");
+                Console.WriteLine("7. Выйти из программы");
                 Console.WriteLine("Введите номер пункта:");
                 Console.ForegroundColor = color;
                 try
@@ -43,6 +44,9 @@ namespace SE.Views
                             manager.CalculatePercentage();
                             break;
                         case 6:
+                            manager.DisplayAccounts();
+                            break;
+                        case 7:
                             alive = false;
                             continue;
                     }

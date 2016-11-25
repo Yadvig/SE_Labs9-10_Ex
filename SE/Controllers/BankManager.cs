@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SE.Models;
 
 namespace SE.Controllers
@@ -10,6 +11,7 @@ namespace SE.Controllers
         {
             bank = Bank;
         }
+        //связывание обработчиков событий в контроллере и самих событий в модели
         public void AttachEvents()
         {
             bank.Attach(
@@ -34,13 +36,8 @@ namespace SE.Controllers
             else
                 accountType = AccountType.Ordinary;
 
-            bank.Open(accountType,
-                sum,
-                AddSumHandler,  // обработчик добавления средств на счет
-                WithdrawSumHandler, // обработчик вывода средств
-                (o, e) => Console.WriteLine(e.Message),  // обработчик начислений процентов в виде лямбда-выражения
-                CloseAccountHandler, // обработчик закрытия счета
-                OpenAccountHandler); // обработчик открытия счета
+            bank.Open(accountType, sum);
+        
         }
 
         public void Withdraw()
@@ -74,6 +71,14 @@ namespace SE.Controllers
         {
             bank.CalculatePercentage();
         }
+        public void DisplayAccounts()
+        {
+            List<Account> accounts = bank.ViewAccounts();
+            foreach (Account account in accounts)
+            {
+                Console.WriteLine("Счет № {0} - Ставка {1}% - Сумма {2} - Дней {3}", account.Id, account.Percentage, account.Sum, account.Days);
+            }
+        }
         // обработчики событий класса Account
         // обработчик открытия счета
         private static void OpenAccountHandler(object sender, AccountEventArgs e)
@@ -89,8 +94,6 @@ namespace SE.Controllers
         private static void WithdrawSumHandler(object sender, AccountEventArgs e)
         {
             Console.WriteLine(e.Message);
-            if (e.Sum > 0)
-                Console.WriteLine("Идем тратить деньги");
         }
         // обработчик закрытия счета
         private static void CloseAccountHandler(object sender, AccountEventArgs e)
